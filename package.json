@@ -1,0 +1,19 @@
+{
+  "name": "clima-mundo",
+  "version": "1.0.0",
+  "description": "App de consultas del CLima ",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/Samuel0023/Clima_Mundo.git"
+  },
+  "author": "Samuel0023",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Samuel0023/Clima_Mundo/issues"
+  },
+  "homepage": "https://github.com/Samuel0023/Clima_Mundo#readme"
+}
