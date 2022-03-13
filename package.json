@@ -1,19 +1,27 @@
 {
-  "name": "clima-mundo",
-  "version": "1.0.0",
-  "description": "App de consultas del CLima ",
-  "main": "app.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+ssh://git@github.com/Samuel0023/Clima_Mundo.git"
-  },
-  "author": "Samuel0023",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/Samuel0023/Clima_Mundo/issues"
-  },
-  "homepage": "https://github.com/Samuel0023/Clima_Mundo#readme"
+    "name": "clima-mundo",
+    "version": "1.0.0",
+    "description": "App de consultas del CLima ",
+    "main": "app.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "start": "node app.js"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+ssh://git@github.com/Samuel0023/Clima_Mundo.git"
+    },
+    "author": "Samuel0023",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/Samuel0023/Clima_Mundo/issues"
+    },
+    "homepage": "https://github.com/Samuel0023/Clima_Mundo#readme",
+    "dependencies": {
+        "axios": "^0.26.1",
+        "colors": "^1.4.0",
+        "fetch": "^1.1.0",
+        "got": "^12.0.1",
+        "inquirer": "^8.2.1"
+    }
 }
