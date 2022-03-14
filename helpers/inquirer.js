@@ -89,7 +89,7 @@ const pause = async() => {
 const readInput = async(message) => {
     const question = [{
         type: 'intput',
-        name: 'Option',
+        name: 'city',
         message,
         validate(value) {
             if (value.length === 0) {
@@ -98,8 +98,9 @@ const readInput = async(message) => {
             return true;
         }
     }]
-    const { desc } = await inquirer.prompt(question);
-    return desc;
+    const { city } = await inquirer.prompt(question);
+    console.log(city);
+    return city;
 }
 
 const confirm = async(message) => {

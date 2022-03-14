@@ -1,18 +1,16 @@
-const { inquirerMenu, pause } = require('./helpers/inquirer');
+const { inquirerMenu, pause, readInput } = require('./helpers/inquirer');
 const Search = require('./models/searches');
+
+
+const search = new Search();
 require('colors');
 
 const actions = async(opt) => {
     switch (opt) {
         case 1:
+            data = await readInput('City: ');
 
-            console.log('\nCity Information\n'.green);
-            console.log('City', );
-            console.log('Lat', );
-            console.log('Lng', );
-            console.log('Temperature', );
-            console.log('Minimun', );
-            console.log('Maximum', );
+            await search.city(data);
             break;
 
         default:
@@ -21,7 +19,6 @@ const actions = async(opt) => {
 }
 const main = async() => {
     let opt;
-    const search = new Search();
     do {
         opt = await inquirerMenu();
         await actions(opt);
