@@ -1,48 +1,60 @@
-const axios = require('axios');
+const fs = require('fs');
+const Api = require('../helpers/api');
+const Place = require('./place');
 require('dotenv').config();
 class Search {
-    history = ['Buenos Aires', 'Madrid'];
-
+    history = [];
+    dbPath = './db/database.json';
     constructor() {
-        // To-do = read DB if exists
+        this.api = new Api();
     }
-    get paramsMapbox() {
-        return {
-            'access_token': 'pk.eyJ1Ijoic2FtdWVsb250aSIsImEiOiJjbDBvdjVva2sxaWR0M2pvM2tpaWN4MjV4In0.mioRtLJIFUz4397iesr9TAd',
-            'limit': 2,
-            'language': 'es',
-            'type': 'place%2Cpostcode%2Caddress'
-
-        }
-    }
-    async city(place = '') {
+    async places(place = '') {
         try {
 
             // http request
-            const instance = axios.create({
-                baseURL: `https://api.mapbox.com/geocoding/v5/mapbox.places/${place}.json`,
-                params: {
-                    'access_token': process.env.MAPBOX_KEY,
-                    'limit': 2,
-                    'language': 'es',
-                    'type': 'place%2Cpostcode%2Caddress'
-                }
-            });
-            const resp = await instance.get();
 
-            console.log(resp.data);
+            const resp = await this.api.req_places(place);
+
+            return resp.data.features.map(place => {
+                return new Place(place.id, place.place_name, place.center[0], place.center[1]);
+            });
         } catch (error) {
             return [];
         }
     }
-    showInfoCity() {
-        console.log('\nCity Information\n'.green);
-        console.log('City', );
-        console.log('Lat', );
-        console.log('Lng', );
-        console.log('Temperature', );
-        console.log('Minimun', );
-        console.log('Maximum', );
+    async showInfoPlace(place) {
+        await place.set_temperature();
+        console.log('\nPlace Information\n'.green);
+        console.log('Address ', `${place.name}`.green);
+        console.log('Lat', `${place.lat}`.green);
+        console.log('Lng', `${place.lng}`.green);
+        console.log('Description', `${place.desc_weather}`.green);
+        console.log('Temperature', `${place.temp}`.green);
+        console.log('Minimun', `${place.temp_min}`.green);
+        console.log('Maximum', `${place.temp_max}`.green);
+    }
+    add_history(place) {
+        if (this.history.includes(place)) {
+            return;
+        }
+        this.history.unshift(place.name);
+    }
+    show_history() {
+        let idx;
+        this.history.forEach((place, indice) => {
+            idx = `${indice+1}.`.green
+            console.log(`${idx} ${place}`);
+        });
+    }
+    save_db() {
+        const payload = {
+            history: this.history
+        };
+
+        fs.writeFileSync(this.dbPath, JSON.stringify(payload));
+    }
+    read_db() {
+
     }
 }
 module.exports = Search;

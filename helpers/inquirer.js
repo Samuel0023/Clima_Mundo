@@ -8,7 +8,7 @@ const menuOpt = [{
     message: 'What you want to do? ',
     choices: [{
             value: 1,
-            name: `${'1.'.green} Search City`
+            name: `${'1.'.green} Search Place`
         },
         {
             value: 2,
@@ -22,20 +22,20 @@ const menuOpt = [{
 
     ]
 }]
-const taskToDelete = async(tasks = []) => {
+const selectPlace = async(places = []) => {
     var idx = '';
-    const choices = tasks.map((task, indice) => {
+    const choices = places.map((place, indice) => {
         idx = `${indice+1}.`.green
         return {
-            value: task.id,
-            name: `${idx} ${task.desc}`
+            value: place.id,
+            name: `${idx} ${place.name}`
         }
     });
 
     const questions = [{
         type: 'list',
         name: 'option',
-        message: 'Borrar',
+        message: 'Select One',
         choices
     }]
     const { option } = await inquirer.prompt(questions);
@@ -78,7 +78,7 @@ const pause = async() => {
 
         type: 'input',
         name: 'pausa',
-        message: `Presione ${'Enter'.green} para continuar`
+        message: `Press ${'Enter'.green} to continue`
 
     }])
     console.log('\n');
@@ -115,7 +115,7 @@ const confirm = async(message) => {
 module.exports = {
     inquirerMenu,
     pause,
-    taskToDelete,
+    selectPlace,
     taskCheckList,
     confirm,
     readInput
