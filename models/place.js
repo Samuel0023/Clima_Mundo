@@ -11,13 +11,14 @@ class Place {
         this.lat = lat;
         this.lng = lng;
     }
-    set_name(name) {
+    fist_name(name) {
         return name.split(',').shift();
     }
     async set_temperature() {
 
         let api = new Api();
-        let weather = await api.req_temperature(this.lat, this.lng, this.name);
+        console.log(this.fist_name(this.name));
+        let weather = await api.req_temperature(this.lat, this.lng, this.fist_name(this.name));
 
         this.temp = weather.temp;
         this.temp_min = weather.min;

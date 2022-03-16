@@ -7,6 +7,7 @@ class Search {
     dbPath = './db/database.json';
     constructor() {
         this.api = new Api();
+        this.read_db();
     }
     async places(place = '') {
         try {
@@ -34,10 +35,9 @@ class Search {
         console.log('Maximum', `${place.temp_max}`.green);
     }
     add_history(place) {
-        if (this.history.includes(place)) {
-            return;
+        if (!(this.history.includes(place.name))) {
+            this.history.unshift(place.name);
         }
-        this.history.unshift(place.name);
     }
     show_history() {
         let idx;
@@ -54,7 +54,14 @@ class Search {
         fs.writeFileSync(this.dbPath, JSON.stringify(payload));
     }
     read_db() {
-
+        if (fs.existsSync(this.dbPath)) {
+            let data = fs.readFileSync(this.dbPath, { encoding: 'utf-8' });
+            console.log(JSON.parse(data));
+            this.history = (JSON.parse(data)).history;
+        }
+    }
+    delete_duplicate() {
+        this.history = Array.from(new Set(this.history));
     }
 }
 module.exports = Search;
