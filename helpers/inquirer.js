@@ -41,25 +41,6 @@ const selectPlace = async(places = []) => {
     const { option } = await inquirer.prompt(questions);
     return option;
 }
-const taskCheckList = async(tasks = []) => {
-    var idx = '';
-    const choices = tasks.map((task, indice) => {
-        idx = `${indice+1}.`.green
-        return {
-            value: task.id,
-            name: `${idx} ${task.desc}`
-        }
-    });
-
-    const questions = [{
-        type: 'checkbox',
-        name: 'ids',
-        message: 'to Select',
-        choices
-    }]
-    const { ids } = await inquirer.prompt(questions);
-    return ids;
-}
 
 const inquirerMenu = async() => {
     console.clear();
@@ -103,20 +84,9 @@ const readInput = async(message) => {
     return city;
 }
 
-const confirm = async(message) => {
-    const question = [{
-        type: 'confirm',
-        name: 'ok',
-        message
-    }]
-    const { ok } = await inquirer.prompt(question);
-    return ok
-}
 module.exports = {
     inquirerMenu,
     pause,
     selectPlace,
-    taskCheckList,
-    confirm,
     readInput
 }
